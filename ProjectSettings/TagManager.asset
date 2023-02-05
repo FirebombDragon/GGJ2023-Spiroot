@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Root
+  - Spirit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Spirit
   - Water
   - UI
   - 
