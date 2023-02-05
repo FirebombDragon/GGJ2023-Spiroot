@@ -21,7 +21,7 @@ public class Spirit : MonoBehaviour
     void FixedUpdate()
     {
         distance = Vector2.Distance(transform.position, player.transform.position);
-        Debug.Log(distance);
+        //Debug.Log(distance);
         if (collected)
         {
             if (following && distance <= 4)
@@ -29,14 +29,14 @@ public class Spirit : MonoBehaviour
             if (!following && distance > 4)
                 following = true;
         }
-        Debug.Log(following);
+        //Debug.Log(following);
         if (following)
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed);
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Spirit Collected");
+        //Debug.Log("Spirit Collected");
         collected = true;
     }
 }
