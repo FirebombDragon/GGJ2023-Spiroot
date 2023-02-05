@@ -74,9 +74,10 @@ public class PlayerActions : MonoBehaviour
         //Stops player from moving
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         GameObject[] obj = GameObject.FindGameObjectsWithTag("Root");
+        GameObject[] horzroot = GameObject.FindGameObjectsWithTag("Horz Root");
         Debug.Log(extended);
         waiting = true;
-        StartCoroutine(ScaleRoot(obj));
+        StartCoroutine(ScaleRoot(obj, horzroot));
         Debug.Log(extended);
         rb.constraints = RigidbodyConstraints2D.None;
     }
@@ -104,7 +105,7 @@ public class PlayerActions : MonoBehaviour
             isGrounded = false;
     }
 
-    IEnumerator ScaleRoot(GameObject[] roots)
+    IEnumerator ScaleRoot(GameObject[] roots, GameObject[] horzroot)
     {
         foreach (GameObject root in roots)
         {
@@ -119,6 +120,23 @@ public class PlayerActions : MonoBehaviour
                 {
                     root.transform.position = new Vector3(root.transform.position.x, root.transform.position.y - rootpos, root.transform.position.z);
                     root.transform.localScale = new Vector3(root.transform.localScale.x, root.transform.localScale.y / rootscale, root.transform.localScale.z);
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        foreach (GameObject root in horzroot)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                if (!extended)
+                {
+                    root.transform.position = new Vector3(root.transform.position.x + rootpos, root.transform.position.y, root.transform.position.z);
+                    root.transform.localScale = new Vector3(root.transform.localScale.x * rootscale, root.transform.localScale.y, root.transform.localScale.z);
+                }
+                else
+                {
+                    root.transform.position = new Vector3(root.transform.position.x - rootpos, root.transform.position.y, root.transform.position.z);
+                    root.transform.localScale = new Vector3(root.transform.localScale.x / rootscale, root.transform.localScale.y, root.transform.localScale.z);
                 }
                 yield return new WaitForSeconds(0.1f);
             }
